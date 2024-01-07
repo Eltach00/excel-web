@@ -1,0 +1,33 @@
+{
+  "name": "excel-web",
+  "version": "1.0.0",
+  "description": "Pure JavaScript Excel App",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack",
+    "build": "webpack --config --production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Eltach00/excel-web.git"
+  },
+  "keywords": [
+    "js",
+    "excel",
+    "javascript"
+  ],
+  "author": "Eltadzh Guliev <eltacquliyev@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Eltach00/excel-web/issues"
+  },
+  "homepage": "https://github.com/Eltach00/excel-web#readme",
+  "private": true,
+  "devDependencies": {
+    "clean-webpack-plugin": "^4.0.0",
+    "copy-webpack-plugin": "^11.0.0",
+    "html-webpack-plugin": "^5.6.0",
+    "webpack": "^5.89.0",
+    "webpack-cli": "^5.1.4"
+  }
+}

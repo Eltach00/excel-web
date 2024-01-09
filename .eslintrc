@@ -1,0 +1,11 @@
+{
+  "parser": "@babel/eslint-parser",
+  "extends": ["eslint:recommended", "google"],
+  "rules": {
+    "no-undef": "off",
+    "linebreak-style": "off",
+    "object-curly-spacing": "off",
+    "eol-last": "off",
+    "require-jsdoc": "off"
+  }
+}

@@ -1,2 +1,3 @@
-import "./module";
-console.log("hello");
+import './module';
+import '@/styles/styles.sass';
+console.log('hello');

@@ -13,13 +13,13 @@ const filename = (ext) => (isDev ? `bundle.${ext}` : `bundle.[hash].${ext}`);
 module.exports = {
   context: path.resolve(__dirname, 'src'),
   mode: 'development',
-  entry: './index.js',
+  entry: './index.ts',
   output: {
     filename: filename('js'),
     path: path.resolve(__dirname, 'dist'),
   },
   resolve: {
-    extensions: ['.js'],
+    extensions: ['.ts', '.js'],
     alias: {
       '@': path.resolve(__dirname, 'src'),
       '@core': path.resolve(__dirname, 'src/core'),
@@ -52,6 +52,11 @@ module.exports = {
   devtool: isDev ? 'source-map' : false,
   module: {
     rules: [
+      {
+        test: /\.ts?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
+      },
       {
         test: /\.s[ac]ss$/i,
         use: [

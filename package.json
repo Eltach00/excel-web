@@ -4,6 +4,7 @@
   "description": "Pure JavaScript Excel App",
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack --mode production",
+    "start": "cross-env NODE_ENV=development webpack",
     "serve": "cross-env NODE_ENV=development webpack serve --open"
   },
   "repository": {
@@ -39,8 +40,13 @@
     "mini-css-extract-plugin": "^2.7.6",
     "sass": "^1.69.7",
     "sass-loader": "^13.3.3",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.3.3",
     "webpack": "^5.89.0",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^4.15.1"
+  },
+  "dependencies": {
+    "normalize.css": "^8.0.1"
   }
 }

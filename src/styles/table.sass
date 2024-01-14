@@ -1,0 +1,43 @@
+@import "variables"
+@import "mixins"
+
+.excel__table
+    position: absolute
+    top: $header-height + $toolbar-height + $formula-height
+    left: 0
+    right: 0
+    overflow-x: auto
+    padding-bottom: 2px
+    .row
+        width: 100%
+        display: flex
+        flex-direction: row
+        min-height: 20px
+        height: $row-height
+        .row-info
+            @include flex-center-center()
+            border: 1px solid $border-color
+            border-top: none
+            border-left: none
+            width: $info-cell-width
+            background: $background-grey
+        .row-data
+            display: flex
+        .column
+            @include flex-center-center()
+            border: 1px solid $border-color
+            border-top: none
+            border-left: none
+            background: $background-grey
+            width: $col-width
+        .cell
+            @include flex-center-center()
+            border: 1px solid $border-color
+            border-left: none
+            border-top: none
+            width: $col-width
+            outline: none
+        .selected
+            border: none
+            outline: 2px solid $outline-color
+            z-index: 2

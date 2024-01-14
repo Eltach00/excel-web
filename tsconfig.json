@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitAny": true,
+    "baseUrl": "./src",
+    "paths": {
+      "*": ["types/*"]
+    },
+    "outDir": "./dist", // Output directory for compiled files
+    "rootDir": "./src" // Root directory of input files
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules"]
+}

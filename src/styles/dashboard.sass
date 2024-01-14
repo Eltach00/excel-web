@@ -1,0 +1,55 @@
+@import "variables"
+@import "mixins"
+
+.dash-board
+    .dash-board__header
+        position: absolute
+        top: 0
+        right: 0
+        left: 0
+        height: $dashboard-header-height
+        text-align: center
+    .dash-board__new
+        margin-top: $dashboard-header-height + 16px
+        padding: 1.5rem
+        background: #dadce0
+        .dash-board__new__create
+            @include flex-center-center()
+            text-align: center
+            width: 180px
+            height: 180px
+            background: #fff
+            font-size: 1.5rem
+            text-decoration: none
+            color: #000
+            font-weight: bold
+            line-height: 35px
+            border-radius: 7px
+            &:hover
+                outline: 3px solid green
+    .dash-board__lists
+        margin-top: 10px
+        padding: 0 12px
+        .dash-board__lists__header
+            @include flex-space-between()
+            font-size: 15px
+        .dash-board__lists__list
+            @include clear-list()
+            margin-top: 10px
+            .record
+                @include flex-space-between()
+                font-size: 14px
+                margin-bottom: 10px
+                border-radius: 20px
+                padding: 15px
+                &:hover
+                    background: #e6f4ea
+                    cursor: pointer
+                a
+                    font-weight: bold
+                    &:hover
+                        text-decoration: underline
+
+.view
+    max-width: 1000px
+    margin: 0 auto

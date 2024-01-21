@@ -3,14 +3,14 @@
     "target": "es6",
     "module": "esnext",
     "moduleResolution": "node",
-    "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "noImplicitAny": true,
-    "baseUrl": "./src",
     "paths": {
-      "*": ["types/*"]
+      "@": ["./src/"],
+      "@core/*": ["./src/core/"],
+      "@interfaces/*": ["./src/core/interfaces/*"]
     },
     "outDir": "./dist", // Output directory for compiled files
     "rootDir": "./src" // Root directory of input files

@@ -8,9 +8,20 @@ export class Excel implements IExcel {
     this.components = options.components;
   }
 
+  getRoot() {
+    const $root = document.createElement('div');
+    $root.className = 'excel';
+    this.components.forEach((Component) => {
+      const node = document.createElement('div');
+      node.className = Component.className;
+      node.innerHTML = new Component(node).toHTML();
+
+      $root.insertAdjacentElement('beforeend', node);
+    });
+    return $root;
+  }
+
   render(): void {
-    const header = document.createElement('h1');
-    header.textContent = 'test';
-    this.$element.insertAdjacentElement('afterbegin', header);
+    this.$element.append(this.getRoot());
   }
 }

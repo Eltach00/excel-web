@@ -3,7 +3,7 @@ import { Header } from '../header/Header';
 import { Table } from '../table/Table';
 import { Toolbar } from '../toolbar/Toolbar';
 
-type IComponent =
+export type IComponent =
   | typeof Header
   | typeof Formula
   | typeof Toolbar
@@ -12,6 +12,7 @@ type IComponent =
 export interface IExcel {
   $element: HTMLElement;
   components: IComponent[];
+  getRoot(): HTMLDivElement;
   render(): void;
 }
 

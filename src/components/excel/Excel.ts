@@ -12,10 +12,8 @@ export class Excel implements IExcel {
   getRoot(): HTMLElement {
     const $root = $.create('div', 'excel');
     this.components.forEach((Component) => {
-      const node = document.createElement('div');
-      node.className = Component.className;
+      const node = $.create('div', Component.className);
       node.innerHTML = new Component(node).toHTML();
-
       $root.insertAdjacentElement('beforeend', node);
     });
     return $root;

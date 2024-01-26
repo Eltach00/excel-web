@@ -1,9 +1,20 @@
-import { IEQuery } from './equery.interface';
+import { IEQuery, IEQueryFunction } from './equery.interface';
 
-class EQuery {}
+class EQuery implements IEQuery {
+  $el: HTMLElement;
+  constructor(selector: string | HTMLElement) {
+    typeof selector === 'string'
+      ? (this.$el = document.querySelector(selector))
+      : (this.$el = selector);
+  }
 
-export const $: IEQuery = () => {
-  return new EQuery();
+  html(): string {
+    return '';
+  }
+}
+
+export const $: IEQueryFunction = (selector: string) => {
+  return new EQuery(selector);
 };
 
 $.create = (tagName: string, className: string): HTMLElement => {

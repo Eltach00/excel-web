@@ -7,4 +7,10 @@ export class Excel implements IExcel {
     this.$element = document.querySelector(element);
     this.components = options.components;
   }
+
+  render(): void {
+    const header = document.createElement('h1');
+    header.textContent = 'test';
+    this.$element.insertAdjacentElement('afterbegin', header);
+  }
 }

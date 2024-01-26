@@ -1,4 +1,4 @@
-import { IDomListener } from '@interfaces/dom-listener.interface';
+import { IDomListener } from '@interfaces';
 
 export class DomListener implements IDomListener {
   $root: any;

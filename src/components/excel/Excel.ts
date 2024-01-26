@@ -1,3 +1,4 @@
+import { $ } from '@EQuery';
 import { ExcelOptions, IExcel } from './excel.interface';
 
 export class Excel implements IExcel {
@@ -8,9 +9,8 @@ export class Excel implements IExcel {
     this.components = options.components;
   }
 
-  getRoot() {
-    const $root = document.createElement('div');
-    $root.className = 'excel';
+  getRoot(): HTMLElement {
+    const $root = $.create('div', 'excel');
     this.components.forEach((Component) => {
       const node = document.createElement('div');
       node.className = Component.className;

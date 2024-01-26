@@ -23,6 +23,8 @@ module.exports = {
     alias: {
       '@': path.resolve(__dirname, 'src'),
       '@core': path.resolve(__dirname, 'src/core'),
+      '@interfaces': path.resolve(__dirname, 'src/core/interfaces'),
+      '@EQuery': path.resolve(__dirname, 'src/core/EQuery'),
     },
   },
   plugins: [

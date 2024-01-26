@@ -9,8 +9,9 @@
     "noImplicitAny": true,
     "paths": {
       "@": ["./src/"],
-      "@core/*": ["./src/core/"],
-      "@interfaces/*": ["./src/core/interfaces/*"]
+      "@core": ["./src/core"],
+      "@interfaces": ["./src/core/interfaces"],
+      "@EQuery": ["./src/core/EQuery"]
     },
     "outDir": "./dist", // Output directory for compiled files
     "rootDir": "./src" // Root directory of input files

@@ -12,7 +12,7 @@ export type IComponent =
 export interface IExcel {
   $element: HTMLElement;
   components: IComponent[];
-  getRoot(): HTMLDivElement;
+  getRoot(): HTMLElement;
   render(): void;
 }
 

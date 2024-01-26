@@ -1,3 +1,4 @@
+import { IEQuery } from '@EQuery';
 import { Formula } from '../formula/Formula';
 import { Header } from '../header/Header';
 import { Table } from '../table/Table';
@@ -10,9 +11,9 @@ export type IComponent =
   | typeof Table;
 
 export interface IExcel {
-  $element: HTMLElement;
+  $element: IEQuery;
   components: IComponent[];
-  getRoot(): HTMLElement;
+  getRoot(): IEQuery;
   render(): void;
 }
 

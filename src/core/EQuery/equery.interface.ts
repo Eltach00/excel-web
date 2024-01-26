@@ -1,7 +1,11 @@
 export interface IEQuery {
-  $el: HTMLElement;
+  $nativeElement: HTMLElement;
+  html(html: string): this | string;
+  clear(): this;
+  append(node: Node | string | IEQuery): this;
 }
 
 export interface IEQueryFunction {
-  create(tagName: string, className: string): HTMLElement;
+  (selector: string | HTMLElement): IEQuery;
+  create(tagName: string, className: string): IEQuery;
 }

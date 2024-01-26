@@ -1,20 +1,21 @@
-import { $ } from '@EQuery';
+import { $, IEQuery } from '@EQuery';
 import { ExcelOptions, IExcel } from './excel.interface';
 
 export class Excel implements IExcel {
-  $element: HTMLElement;
+  $element: IEQuery;
   components;
   constructor(element: string, options: ExcelOptions) {
-    this.$element = document.querySelector(element);
+    this.$element = $(element);
     this.components = options.components;
   }
 
-  getRoot(): HTMLElement {
+  getRoot(): IEQuery {
     const $root = $.create('div', 'excel');
+
     this.components.forEach((Component) => {
       const node = $.create('div', Component.className);
-      node.innerHTML = new Component(node).toHTML();
-      $root.insertAdjacentElement('beforeend', node);
+      node.html(new Component(node).toHTML());
+      $root.append(node);
     });
     return $root;
   }

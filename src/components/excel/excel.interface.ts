@@ -4,19 +4,21 @@ import { Header } from '../header/Header';
 import { Table } from '../table/Table';
 import { Toolbar } from '../toolbar/Toolbar';
 
-export type IComponent =
+export type EnteredComponentsInterface =
   | typeof Header
   | typeof Formula
   | typeof Toolbar
   | typeof Table;
 
-export interface IExcel {
+export type ComponentsInstanceInterface = Header | Formula | Toolbar | Table;
+export interface ExcelInterface {
   $element: IEQuery;
-  components: IComponent[];
+  enteredComponents: EnteredComponentsInterface[];
+  componentsInstance: ComponentsInstanceInterface[];
   getRoot(): IEQuery;
   render(): void;
 }
 
 export interface ExcelOptions {
-  components: IComponent[];
+  components: EnteredComponentsInterface[];
 }

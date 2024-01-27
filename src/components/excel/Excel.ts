@@ -3,13 +3,13 @@ import {
   ExcelOptions,
   EnteredComponentsInterface,
   ExcelInterface,
-  ComponentsInstanceInterface,
+  ComponentsInstancesInterface,
 } from './excel.interface';
 
 export class Excel implements ExcelInterface {
   $element: IEQuery;
   enteredComponents: EnteredComponentsInterface[];
-  componentsInstance: ComponentsInstanceInterface[] = [];
+  componentsInstances: ComponentsInstancesInterface[] = [];
 
   constructor(element: string, options: ExcelOptions) {
     this.$element = $(element);
@@ -19,19 +19,24 @@ export class Excel implements ExcelInterface {
   getRoot(): IEQuery {
     const $root = $.create('div', 'excel');
 
-    this.componentsInstance = this.enteredComponents.map((EnteredComponent) => {
-      const node = $.create('div', EnteredComponent.className);
-      const componentInstance = new EnteredComponent(node);
-      node.html(componentInstance.toHTML());
-      $root.append(node);
-      return componentInstance;
-    });
+    this.componentsInstances = this.enteredComponents.map(
+      (EnteredComponent) => {
+        const node = $.create('div', EnteredComponent.className);
+        const componentInstance = new EnteredComponent(node, {
+          name: 'test',
+          listeners: ['input'],
+        });
+        node.html(componentInstance.toHTML());
+        $root.append(node);
+        return componentInstance;
+      }
+    );
     return $root;
   }
 
   render(): void {
     this.$element.append(this.getRoot());
-    this.componentsInstance.forEach((component) => {
+    this.componentsInstances.forEach((component) => {
       component.initListeners();
     });
   }

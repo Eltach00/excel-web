@@ -17,9 +17,7 @@ export class Table extends ExcelComponents implements ITable {
           <div class="row">
             <div class="row-info">1</div>
             <div class="row-data">
-              <div class="cell selected" contenteditable spellcheck="false">
-                A1
-              </div>
+              <div class="cell selected" contentEditable="true" spellcheck="false" data-placeholder="A1"></div>
               <div class="cell" contenteditable spellcheck="false">B1</div>
               <div class="cell" contenteditable spellcheck="false">C1</div>
             </div>

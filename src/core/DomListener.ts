@@ -1,9 +1,9 @@
 import { DOMListenerInterface } from '@interfaces';
 import { IEQuery } from './EQuery/equery.interface';
 
-export abstract class DomListener implements DOMListenerInterface {
-  $root: HTMLElement | IEQuery;
-  listeners: string | string[];
+export abstract class DomListener {
+  protected $root: HTMLElement | IEQuery;
+  protected listeners: string | string[];
 
   constructor(root: HTMLElement | IEQuery, listeners: string | string[]) {
     if (!root) {
@@ -14,8 +14,16 @@ export abstract class DomListener implements DOMListenerInterface {
   }
 
   protected addListeners(): void {
-    console.log(this.listeners);
+    if (this.listeners instanceof Array) {
+      this.listeners.forEach((listener) => {
+        this.$root.addEventListener(listener, (event: any) => {
+          console.log('here');
+        });
+      });
+    } else {
+      this.$root.addEventListener(this.listeners, () => {});
+    }
   }
 
-  removeListeners(): void {}
+  protected removeListeners(): void {}
 }

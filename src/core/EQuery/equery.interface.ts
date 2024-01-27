@@ -2,7 +2,8 @@ export interface IEQuery {
   $nativeElement: HTMLElement;
   html(html: string): this | string;
   clear(): this;
-  append(node: Node | string | IEQuery): this;
+  append(node: HTMLElement | string | IEQuery): this;
+  addEventListener(type: string, listener: any, options?: any): this;
 }
 
 export interface IEQueryFunction {

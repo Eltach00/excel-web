@@ -10,11 +10,11 @@ export type EnteredComponentsInterface =
   | typeof Toolbar
   | typeof Table;
 
-export type ComponentsInstanceInterface = Header | Formula | Toolbar | Table;
+export type ComponentsInstancesInterface = Header | Formula | Toolbar | Table;
 export interface ExcelInterface {
   $element: IEQuery;
   enteredComponents: EnteredComponentsInterface[];
-  componentsInstance: ComponentsInstanceInterface[];
+  componentsInstances: ComponentsInstancesInterface[];
   getRoot(): IEQuery;
   render(): void;
 }

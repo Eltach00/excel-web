@@ -41,3 +41,5 @@
             border: none
             outline: 2px solid $outline-color
             z-index: 2
+        [contentEditable=true]:empty:not(:focus):before
+            content: attr(data-placeholder)

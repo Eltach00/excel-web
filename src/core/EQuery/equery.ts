@@ -2,9 +2,10 @@ import { IEQuery, IEQueryFunction } from './equery.interface';
 
 class EQuery implements IEQuery {
   $nativeElement: HTMLElement;
+
   constructor(selector: string | HTMLElement) {
     typeof selector === 'string'
-      ? (this.$nativeElement = document.querySelector(selector))
+      ? (this.$nativeElement = document.querySelector(selector)!)
       : (this.$nativeElement = selector);
   }
 
@@ -18,20 +19,22 @@ class EQuery implements IEQuery {
     return this;
   }
 
-  append(node: Node | string | IEQuery): this {
+  append(node: HTMLElement | string | IEQuery): this {
     if (node instanceof EQuery) {
-      node = node.$nativeElement;
+      this.$nativeElement.append(node.$nativeElement);
+    } else if (node instanceof HTMLElement || typeof node === 'string') {
+      this.$nativeElement.append(node);
     }
-    if (Element.prototype.append) {
-      this.$nativeElement.append(node as Node | string);
-    } else {
-      this.$nativeElement.appendChild(node as Node);
-    }
+    return this;
+  }
+
+  addEventListener(type: string, functionName: any, options?: any): this {
+    this.$nativeElement.addEventListener(type, functionName, options);
     return this;
   }
 }
 
-export const $: IEQueryFunction = (selector: string): IEQuery => {
+export const $: IEQueryFunction = (selector: string | HTMLElement): IEQuery => {
   return new EQuery(selector);
 };
 

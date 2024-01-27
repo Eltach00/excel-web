@@ -1,7 +1,7 @@
-import { ExcelComponent } from '../../core/ExcelComponent';
+import { ExcelComponents } from '../../core/ExcelComponents';
 import { ITable } from './table.interface';
 
-export class Table extends ExcelComponent implements ITable {
+export class Table extends ExcelComponents implements ITable {
   static className = 'excel__table';
 
   toHTML(): string {

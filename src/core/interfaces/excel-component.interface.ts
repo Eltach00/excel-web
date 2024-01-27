@@ -1,3 +1,3 @@
-export interface IExcelComponent {
+export interface IExcelComponents {
   toHTML(): string;
 }

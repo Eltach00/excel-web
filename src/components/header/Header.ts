@@ -1,7 +1,7 @@
-import { ExcelComponent } from '../../core/ExcelComponent';
+import { ExcelComponents } from '../../core/ExcelComponents';
 import { IHeader } from './header.interface';
 
-export class Header extends ExcelComponent implements IHeader {
+export class Header extends ExcelComponents implements IHeader {
   static className = 'excel__header';
 
   toHTML(): string {

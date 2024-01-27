@@ -1,7 +1,7 @@
-import { ExcelComponent } from '../../core/ExcelComponent';
+import { ExcelComponents } from '../../core/ExcelComponents';
 import { IFormula } from './formula.interface';
 
-export class Formula extends ExcelComponent implements IFormula {
+export class Formula extends ExcelComponents implements IFormula {
   static className = 'excel__formula';
 
   toHTML(): string {

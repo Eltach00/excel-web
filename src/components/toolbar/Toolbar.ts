@@ -1,7 +1,7 @@
-import { ExcelComponent } from '../../core/ExcelComponent';
+import { ExcelComponents } from '../../core/ExcelComponents';
 import { IToolbar } from './toolbar.interface';
 
-export class Toolbar extends ExcelComponent implements IToolbar {
+export class Toolbar extends ExcelComponents implements IToolbar {
   static className = 'excel__toolbar';
 
   toHTML(): string {

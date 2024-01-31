@@ -1,4 +1,4 @@
-import { ExcelComponentsInterface, ExcelComponentsOptions } from '@interfaces';
+import { ExcelComponentsOptions } from '@interfaces';
 import { DomListener } from './DomListener';
 import { IEQuery } from '@EQuery';
 

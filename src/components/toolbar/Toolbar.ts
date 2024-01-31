@@ -1,8 +1,13 @@
 import { ExcelComponents } from '../../core/ExcelComponents';
+import { ExcelComponentsOptions } from '../../core/interfaces/excel-component.interface';
 import { IToolbar } from './toolbar.interface';
 
 export class Toolbar extends ExcelComponents implements IToolbar {
   static className = 'excel__toolbar';
+  static options: ExcelComponentsOptions = {
+    name: 'toolbar',
+    listeners: 'input',
+  };
 
   toHTML(): string {
     return `

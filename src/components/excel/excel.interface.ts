@@ -4,7 +4,7 @@ import { Header } from '../header/Header';
 import { Table } from '../table/Table';
 import { Toolbar } from '../toolbar/Toolbar';
 
-export type EnteredComponentsInterface =
+export type EnteredClassesInterface =
   | typeof Header
   | typeof Formula
   | typeof Toolbar
@@ -12,13 +12,13 @@ export type EnteredComponentsInterface =
 
 export type ComponentsInstancesInterface = Header | Formula | Toolbar | Table;
 export interface ExcelInterface {
-  $element: IEQuery;
-  enteredComponents: EnteredComponentsInterface[];
+  $rootElement: IEQuery;
+  enteredClasses: EnteredClassesInterface[];
   componentsInstances: ComponentsInstancesInterface[];
-  getRoot(): IEQuery;
+  getComponents(): IEQuery;
   render(): void;
 }
 
 export interface ExcelOptions {
-  components: EnteredComponentsInterface[];
+  components: EnteredClassesInterface[];
 }

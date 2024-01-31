@@ -1,41 +1,40 @@
 import { $, IEQuery } from '@EQuery';
 import {
   ExcelOptions,
-  EnteredComponentsInterface,
   ExcelInterface,
   ComponentsInstancesInterface,
+  EnteredClassesInterface,
 } from './excel.interface';
 
 export class Excel implements ExcelInterface {
-  $element: IEQuery;
-  enteredComponents: EnteredComponentsInterface[];
+  $rootElement: IEQuery;
+  enteredClasses: EnteredClassesInterface[];
   componentsInstances: ComponentsInstancesInterface[] = [];
 
-  constructor(element: string, options: ExcelOptions) {
-    this.$element = $(element);
-    this.enteredComponents = options.components;
+  constructor(rootElement: string, options: ExcelOptions) {
+    this.$rootElement = $(rootElement);
+    this.enteredClasses = options.components;
+    this.render();
   }
 
-  getRoot(): IEQuery {
-    const $root = $.create('div', 'excel');
+  getComponents(): IEQuery {
+    const $rootDivElement = $.create('div', 'excel');
 
-    this.componentsInstances = this.enteredComponents.map(
-      (EnteredComponent) => {
-        const node = $.create('div', EnteredComponent.className);
-        const componentInstance = new EnteredComponent(node, {
-          name: 'test',
-          listeners: ['input'],
-        });
-        node.html(componentInstance.toHTML());
-        $root.append(node);
-        return componentInstance;
-      }
-    );
-    return $root;
+    this.componentsInstances = this.enteredClasses.map((EnteredComponent) => {
+      const node = $.create('div', EnteredComponent.className);
+      const componentInstance = new EnteredComponent(
+        node,
+        EnteredComponent?.options
+      );
+      node.html(componentInstance.toHTML());
+      $rootDivElement.append(node);
+      return componentInstance;
+    });
+    return $rootDivElement;
   }
 
   render(): void {
-    this.$element.append(this.getRoot());
+    this.$rootElement.append(this.getComponents());
     this.componentsInstances.forEach((component) => {
       component.initListeners();
     });

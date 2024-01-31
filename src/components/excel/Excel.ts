@@ -20,11 +20,11 @@ export class Excel implements ExcelInterface {
   getComponents(): IEQuery {
     const $rootDivElement = $.create('div', 'excel');
 
-    this.componentsInstances = this.enteredClasses.map((EnteredComponent) => {
-      const node = $.create('div', EnteredComponent.className);
-      const componentInstance = new EnteredComponent(
+    this.componentsInstances = this.enteredClasses.map((EnteredClass) => {
+      const node = $.create('div', EnteredClass.className);
+      const componentInstance = new EnteredClass(
         node,
-        EnteredComponent?.options
+        EnteredClass?.options
       );
       node.html(componentInstance.toHTML());
       $rootDivElement.append(node);

@@ -4,6 +4,6 @@ export interface ExcelComponentsInterface {
 }
 
 export interface ExcelComponentsOptions {
-  name: string;
-  listeners: string | string[];
+  name?: string;
+  listeners?: string | string[];
 }

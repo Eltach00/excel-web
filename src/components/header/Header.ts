@@ -6,7 +6,7 @@ export class Header extends ExcelComponents implements IHeader {
   static className = 'excel__header';
   static options: ExcelComponentsOptions = {
     name: 'header',
-    listeners: 'input',
+    listeners: ['input', 'click'],
   };
 
   toHTML(): string {
@@ -19,5 +19,13 @@ export class Header extends ExcelComponents implements IHeader {
               <span class="material-symbols-outlined"> exit_to_app </span>
             </div>
           </div>`;
+  }
+
+  onInput(event: any): void {
+    console.log(event);
+  }
+
+  onClick(event: any): void {
+    console.log(event);
   }
 }

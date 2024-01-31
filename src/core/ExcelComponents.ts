@@ -4,7 +4,7 @@ import { IEQuery } from '@EQuery';
 
 export abstract class ExcelComponents extends DomListener {
   constructor(root: HTMLElement | IEQuery, options: ExcelComponentsOptions) {
-    super(root, options.listeners);
+    super(root, options?.listeners);
   }
 
   toHTML(): string {

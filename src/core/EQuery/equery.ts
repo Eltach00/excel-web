@@ -28,8 +28,12 @@ class EQuery implements IEQuery {
     return this;
   }
 
-  addEventListener(type: string, functionName: any, options?: any): this {
-    this.$nativeElement.addEventListener(type, functionName, options);
+  addEventListener(
+    type: string,
+    callbackFunction: EventListenerOrEventListenerObject,
+    options?: boolean | AddEventListenerOptions | undefined
+  ): this {
+    this.$nativeElement.addEventListener(type, callbackFunction, options);
     return this;
   }
 }
@@ -38,7 +42,7 @@ export const $: IEQueryFunction = (selector: string | HTMLElement): IEQuery => {
   return new EQuery(selector);
 };
 
-$.create = (tagName: string, className: string): IEQuery => {
+$.create = (tagName: string, className: string = ''): IEQuery => {
   const element = document.createElement(tagName);
   element.classList.add(className);
   return $(element);

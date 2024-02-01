@@ -1,10 +1,10 @@
-import { ExcelComponentsOptions } from '@interfaces';
+import { ComponentsOptions } from '@interfaces';
 import { DomListener } from './DomListener';
 import { IEQuery } from '@EQuery';
 
 export abstract class ExcelComponents extends DomListener {
-  constructor(root: HTMLElement | IEQuery, options: ExcelComponentsOptions) {
-    super(root, options?.listeners);
+  constructor(root: HTMLElement | IEQuery, options: ComponentsOptions) {
+    super(root, options);
   }
 
   toHTML(): string {
@@ -14,4 +14,9 @@ export abstract class ExcelComponents extends DomListener {
   initListeners(): void {
     this.addListeners();
   }
+
+  destroyListeners(): void {
+    this.removeListeners();
+  }
+
 }

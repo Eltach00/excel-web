@@ -39,4 +39,10 @@ export class Excel implements ExcelInterface {
       component.initListeners();
     });
   }
+
+  destroy(): void {
+    this.componentsInstances.forEach((component) => {
+      component.destroyListeners();
+    });
+  }
 }

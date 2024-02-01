@@ -8,6 +8,7 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "noImplicitAny": false,
+    "noImplicitThis": true,
     "paths": {
       "@": ["./src/"],
       "@core": ["./src/core"],

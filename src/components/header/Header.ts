@@ -1,10 +1,10 @@
 import { ExcelComponents } from '../../core/ExcelComponents';
-import { ExcelComponentsOptions } from '../../core/interfaces/excel-component.interface';
+import { ComponentsOptions } from '../../core/interfaces/excel-component.interface';
 import { IHeader } from './header.interface';
 
 export class Header extends ExcelComponents implements IHeader {
   static className = 'excel__header';
-  static options: ExcelComponentsOptions = {
+  static options: ComponentsOptions = {
     name: 'header',
     listeners: ['input', 'click'],
   };
@@ -22,7 +22,7 @@ export class Header extends ExcelComponents implements IHeader {
   }
 
   onInput(event: any): void {
-    console.log(event);
+    console.log(this.$root);
   }
 
   onClick(event: any): void {

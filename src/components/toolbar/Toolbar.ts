@@ -1,12 +1,12 @@
 import { ExcelComponents } from '../../core/ExcelComponents';
-import { ExcelComponentsOptions } from '../../core/interfaces/excel-component.interface';
+import { ComponentsOptions } from '../../core/interfaces/excel-component.interface';
 import { IToolbar } from './toolbar.interface';
 
 export class Toolbar extends ExcelComponents implements IToolbar {
   static className = 'excel__toolbar';
-  static options: ExcelComponentsOptions = {
+  static options: ComponentsOptions = {
     name: 'toolbar',
-    listeners: 'input',
+    listeners: ['input'],
   };
 
   toHTML(): string {
@@ -35,5 +35,9 @@ export class Toolbar extends ExcelComponents implements IToolbar {
             <i class="material-icons">format_underlined</i>
           </div>
         `;
+  }
+
+  onInput(event: any): void {
+    console.log(this.$root);
   }
 }

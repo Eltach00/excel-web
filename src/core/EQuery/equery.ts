@@ -36,6 +36,15 @@ class EQuery implements IEQuery {
     this.$nativeElement.addEventListener(type, callbackFunction, options);
     return this;
   }
+
+  removeEventListener(
+    type: string,
+    callbackFunction: EventListenerOrEventListenerObject,
+    options?: boolean | EventListenerOptions | undefined
+  ): this {
+    this.$nativeElement.removeEventListener(type, callbackFunction, options);
+    return this;
+  }
 }
 
 export const $: IEQueryFunction = (selector: string | HTMLElement): IEQuery => {

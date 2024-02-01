@@ -1,39 +1,40 @@
-import { ComponentsInstancesInterface, EnteredClassesInterface } from '../components/excel/excel.interface';
-import { IHeader } from '../components/header/header.interface';
 import { IEQuery } from './EQuery/equery.interface';
 import { capitalize } from './helpers/capitalize';
+import { ComponentsOptions } from './interfaces/excel-component.interface';
 
 export abstract class DomListener {
   protected $root: HTMLElement | IEQuery;
-  protected listeners?: string | string[];
+  protected listeners: string[];
+  protected name: string;
 
-  constructor(root: HTMLElement | IEQuery, listeners?: string | string[]) {
+  constructor(root: HTMLElement | IEQuery, options: ComponentsOptions) {
     if (!root) {
       throw new Error('No root element provided');
     }
     this.$root = root;
-    this.listeners = listeners;
+    this.listeners = options.listeners;
+    this.name = options.name;
   }
 
   protected addListeners(): void {
-    if (this.listeners instanceof Array) {
-      this.listeners.forEach((listener) => {
-        const methodName = this.getMethodName(listener)
-        this.$root.addEventListener(
-          listener,
-          (this as unknown as ComponentsInstancesInterface)[methodName]
-        );
-      });
-    } else {
-      this.$root.addEventListener(this.listeners!, () => {
-        console.log(this);
-      });
-    }
+    this.listeners.forEach((listener) => {
+      const methodName = this.getMethodName(listener);
+      if (!this[methodName]) {
+        throw new Error(`Method ${methodName} not implemented on ${this.name} Component`);
+      }
+       this[methodName] = this[methodName]?.bind(this);
+      this.$root.addEventListener(listener, this[methodName]);
+    });
   }
 
-  private getMethodName(listenerName: string): string { 
+  private getMethodName(listenerName: string): string {
     return 'on' + capitalize(listenerName);
   }
 
-  protected removeListeners(): void {}
+  protected removeListeners(): void {
+    this.listeners.forEach((listener) => {
+      const methodName = this.getMethodName(listener);
+      this.$root.removeEventListener(listener, this[methodName]);
+    });
+  }
 }

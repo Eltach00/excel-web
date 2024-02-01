@@ -8,3 +8,9 @@ import '@/styles/index.sass';
 const excel = new Excel('#app', {
   components: [Header, Toolbar, Formula, Table],
 });
+
+setTimeout(() => {
+  excel.destroy();
+  console.log('destroyed');
+  
+}, 2000);

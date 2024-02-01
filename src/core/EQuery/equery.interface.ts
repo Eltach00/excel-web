@@ -8,6 +8,11 @@ export interface IEQuery {
     listener: EventListenerOrEventListenerObject,
     options?: boolean | AddEventListenerOptions | undefined
   ): this;
+  removeEventListener(
+    type: string,
+    callbackFunction: EventListenerOrEventListenerObject,
+    options?: boolean | EventListenerOptions | undefined
+  ): this;
 }
 
 export interface IEQueryFunction {

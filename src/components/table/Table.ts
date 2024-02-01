@@ -1,12 +1,12 @@
 import { ExcelComponents } from '../../core/ExcelComponents';
-import { ExcelComponentsOptions } from '../../core/interfaces/excel-component.interface';
+import { ComponentsOptions } from '../../core/interfaces/excel-component.interface';
 import { ITable } from './table.interface';
 
 export class Table extends ExcelComponents implements ITable {
   static className = 'excel__table';
-  static options: ExcelComponentsOptions = {
+  static options: ComponentsOptions = {
     name: 'table',
-    listeners: 'input',
+    listeners: ['input'],
   };
 
   toHTML(): string {
@@ -38,5 +38,9 @@ export class Table extends ExcelComponents implements ITable {
             </div>
           </div>
         `;
+  }
+
+  onInput(event: any): void {
+    console.log(this.$root);
   }
 }

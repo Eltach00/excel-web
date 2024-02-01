@@ -1,2 +1,2 @@
 # excel-web
-Pure JavaScript Excel App
+Pure TypeScript Excel App

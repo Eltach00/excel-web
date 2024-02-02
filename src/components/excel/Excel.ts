@@ -17,7 +17,7 @@ export class Excel implements ExcelInterface {
     this.render();
   }
 
-  getComponents(): IEQuery {
+  private getComponents(): IEQuery {
     const $rootDivElement = $.create('div', 'excel');
 
     this.componentsInstances = this.enteredClasses.map((EnteredClass) => {

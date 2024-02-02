@@ -5,12 +5,6 @@ import { Formula } from './components/formula/Formula';
 import { Table } from './components/table/Table';
 import '@/styles/index.sass';
 
-const excel = new Excel('#app', {
+new Excel('#app', {
   components: [Header, Toolbar, Formula, Table],
-});
-
-setTimeout(() => {
-  excel.destroy();
-  console.log('destroyed');
-  
-}, 2000);
+})

@@ -15,7 +15,6 @@ export interface ExcelInterface {
   $rootElement: IEQuery;
   enteredClasses: EnteredClassesInterface[];
   componentsInstances: ComponentsInstancesInterface[];
-  getComponents(): IEQuery;
   render(): void;
 }
 

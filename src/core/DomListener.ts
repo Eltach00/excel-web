@@ -20,9 +20,11 @@ export abstract class DomListener {
     this.listeners.forEach((listener) => {
       const methodName = this.getMethodName(listener);
       if (!this[methodName]) {
-        throw new Error(`Method ${methodName} not implemented on ${this.name} Component`);
+        throw new Error(
+          `Method ${methodName} not implemented on ${this.name} Component`
+        );
       }
-       this[methodName] = this[methodName]?.bind(this);
+      this[methodName] = this[methodName]?.bind(this);
       this.$root.addEventListener(listener, this[methodName]);
     });
   }

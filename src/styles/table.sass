@@ -19,7 +19,7 @@
             border: 1px solid $border-color
             border-top: none
             border-left: none
-            width: $info-cell-width
+            min-width: $info-cell-width
             background: $background-grey
         .row-data
             display: flex
@@ -37,9 +37,11 @@
             border-top: none
             width: $col-width
             outline: none
+            text-align: center
+            line-height: 22px
+        [contentEditable]:empty:not(:focus):before
+            content: attr(data-placeholder)
         .selected
             border: none
             outline: 2px solid $outline-color
             z-index: 2
-        [contentEditable=true]:empty:not(:focus):before
-            content: attr(data-placeholder)

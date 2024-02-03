@@ -5,11 +5,11 @@ export class Table extends ExcelComponents implements ITable {
   static className = 'excel__table';
   static options: ComponentsOptions = {
     name: 'Table',
-    listeners: ['input'],
+    listeners: ['click', 'mousedown', 'mouseup'],
   };
 
   private countsRow = 26;
-  
+
   private CODES = {
     A: 65,
     Z: 90,
@@ -19,8 +19,21 @@ export class Table extends ExcelComponents implements ITable {
     return this.createTemplate(this.countsRow);
   }
 
-  onInput(event: any): void {
-    console.log(this.$root);
+  onClick(event: any): void {
+    console.log('click');
+  }
+
+  onMousedown(event: any): void {
+    this.listeners.push('mousemove');
+    console.log('mousedown');
+  }
+
+  onMousemove(event: any): void {
+    console.log('mousemove');
+  }
+
+  onMouseup(event: any): void {
+    console.log('mouseup');
   }
 
   private createTemplate(countRows: number): string {
@@ -53,13 +66,22 @@ export class Table extends ExcelComponents implements ITable {
     infoContent: string | number = ''
   ): string {
     return `<div class="row">
-      <div class="row-info">${infoContent}</div>
+    ${
+      infoContent
+      ? `<div class="row-info">
+            ${infoContent}
+            <div class="row-resize"></div>
+          </div>`
+        : `<div class="row-info">${infoContent}</div>`
+    }
       <div class="row-data">${dataContent}</div>
     </div>`;
   }
 
   private createColumn(columnLetters: string): string {
-    return ` <div class="column">${columnLetters}</div>`;
+    return /*html*/ `<div class="column">${columnLetters}
+    <div class="column-resize"></div>
+    </div>`;
   }
 
   private createCell(placeHolderData: string = ''): string {

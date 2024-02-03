@@ -15,21 +15,44 @@
         min-height: 20px
         height: $row-height
         .row-info
+            position: relative
             @include flex-center-center()
             border: 1px solid $border-color
             border-top: none
             border-left: none
             min-width: $info-cell-width
             background: $background-grey
+            .row-resize
+                position: absolute
+                bottom: 0
+                width: 100%
+                height: 4px
+                background-color: $outline-color
+                cursor: row-resize
+                opacity: 0
+                &:hover
+                    opacity: 1
         .row-data
             display: flex
         .column
+            position: relative
             @include flex-center-center()
             border: 1px solid $border-color
             border-top: none
             border-left: none
             background: $background-grey
             width: $col-width
+        .column-resize
+            position: absolute
+            top: 0
+            bottom: 0
+            right: 0
+            background-color: $outline-color
+            width: 4px
+            cursor: col-resize
+            opacity: 0
+            &:hover
+                opacity: 1
         .cell
             @include flex-center-center()
             border: 1px solid $border-color

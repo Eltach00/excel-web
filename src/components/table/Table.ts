@@ -72,7 +72,7 @@ export class Table extends ExcelComponents implements ITable {
             ${infoContent}
             <div class="row-resize"></div>
           </div>`
-        : `<div class="row-info">${infoContent}</div>`
+        : `<div class="row-info"></div>`
     }
       <div class="row-data">${dataContent}</div>
     </div>`;

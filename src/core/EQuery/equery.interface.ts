@@ -13,6 +13,11 @@ export interface IEQuery {
     callbackFunction: EventListenerOrEventListenerObject,
     options?: boolean | EventListenerOptions | undefined
   ): this;
+  closest(selector: string): HTMLElement | null;
+  getCoords(): DOMRect;
+  remove(): this;
+  getTextContent(): string;
+  querySelectorAll(selector: string): NodeListOf<HTMLElement>;
 }
 
 export interface IEQueryFunction {

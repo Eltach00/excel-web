@@ -28,6 +28,19 @@ class EQuery implements IEQuery {
     return this;
   }
 
+  remove(): this {
+    this.$nativeElement.remove();
+    return this;
+  }
+
+  getTextContent(): string {
+    return this.$nativeElement.textContent!;
+  }
+
+  querySelectorAll(selector: string): NodeListOf<HTMLElement> {
+    return this.$nativeElement.querySelectorAll(selector);
+  }
+
   addEventListener(
     type: string,
     callbackFunction: EventListenerOrEventListenerObject,
@@ -44,6 +57,14 @@ class EQuery implements IEQuery {
   ): this {
     this.$nativeElement.removeEventListener(type, callbackFunction, options);
     return this;
+  }
+
+  closest(selector: string): HTMLElement | null {
+    return this.$nativeElement.closest(selector);
+  }
+
+  getCoords(): DOMRect {
+    return this.$nativeElement.getBoundingClientRect();
   }
 }
 

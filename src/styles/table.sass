@@ -9,7 +9,8 @@
     overflow-x: auto
     padding-bottom: 2px
     .row
-        width: 100%
+        position: relative
+        width: 100vw
         display: flex
         flex-direction: row
         min-height: 20px
@@ -32,6 +33,15 @@
                 opacity: 0
                 &:hover
                     opacity: 1
+                &:active
+                    opacity: 1
+        .row-resize-line
+            position: absolute
+            bottom: 0
+            height: 5px
+            background-color: $outline-color
+            cursor: row-resize
+            width: 100%
         .row-data
             display: flex
         .column
@@ -42,17 +52,23 @@
             border-left: none
             background: $background-grey
             width: $col-width
-        .column-resize
-            position: absolute
-            top: 0
-            bottom: 0
-            right: 0
-            background-color: $outline-color
-            width: 4px
-            cursor: col-resize
-            opacity: 0
-            &:hover
+            min-width: 20px
+            .column-resize, .column-resize-line
+                position: absolute
+                top: 0
+                bottom: 0
+                right: 0
+                background-color: $outline-color
+                width: 4px
+                cursor: col-resize
+                opacity: 0
+                &:hover
+                    opacity: 1
+                &:active
+                    opacity: 1
+            .column-resize-line
                 opacity: 1
+                height: 85vh
         .cell
             @include flex-center-center()
             border: 1px solid $border-color

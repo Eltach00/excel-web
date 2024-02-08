@@ -1,4 +1,4 @@
-import { $, IEQuery } from '@EQuery';
+import { $ } from '@EQuery';
 import { ExcelComponents } from '../../core/ExcelComponents';
 import { ComponentsOptions } from '../../core/interfaces/excel-component.interface';
 import { ITable } from './table.interface';
@@ -9,17 +9,16 @@ export class Table extends ExcelComponents implements ITable {
     listeners: ['mousedown'],
   };
 
-  private countsRow = 26;
+  private countsRow = 40;
 
   private CODES = {
     A: 65,
     Z: 90,
   };
 
-  constructor(root: IEQuery | HTMLElement, options: ComponentsOptions) {
-    super(root, options);
-    // this.mouseMoveHandler = this.mouseMoveHandler.bind(this);
-  }
+  // constructor() {
+  // this.mouseMoveHandler = this.mouseMoveHandler.bind(this);
+  // }
 
   toHTML(): string {
     return this.createTemplate(this.countsRow);
@@ -30,12 +29,15 @@ export class Table extends ExcelComponents implements ITable {
   onMousedown(event: any): void {
     if (event.target.dataset.resize === 'col') {
       const $target = $(event.target);
-      const $resizableCol = $($target.closest('[data-type="resizable"]')!);
+
+      const $resizableCol = $($target.closest('[data-type="resizableCol"]')!);
+
       const lineColElement = $.create('div', 'column-resize-line');
       $resizableCol.append(lineColElement);
-      const textContentOfCol = $resizableCol.getTextContent().trim();
+
+      const colNumber = $resizableCol.$nativeElement.dataset.colNumber;
       const resizableCellsList = this.$root.querySelectorAll(
-        `[data-type="${textContentOfCol}"]`
+        `[data-type="${colNumber}"]`
       );
 
       const coords = $resizableCol.getCoords();
@@ -57,7 +59,9 @@ export class Table extends ExcelComponents implements ITable {
       // document.addEventListener('mousemove', this.mouseMoveHandler);
     } else if (event.target.dataset.resize === 'row') {
       const $target = $(event.target);
+
       const $resizableRow = $($target.closest('[data-type="resizableRow"]')!);
+
       const $lineRowElement = $.create('div', 'row-resize-line');
       $resizableRow.append($lineRowElement);
 
@@ -95,12 +99,12 @@ export class Table extends ExcelComponents implements ITable {
     const columns: string[] = new Array(columnsCount)
       .fill('')
       .map((column, i) => {
-        return this.createColumn(String.fromCharCode(this.CODES.A + i));
+        return this.createColumn(String.fromCharCode(this.CODES.A + i), i);
       });
 
     const cells: string[] = new Array(columnsCount).fill('').map((cell, i) => {
       // return this.createCell(`${String.fromCharCode(this.CODES.A + index)}${index + 1}`);
-      return this.createCell(String.fromCharCode(this.CODES.A + i));
+      return this.createCell(i);
     });
 
     const firtsRow = this.createRow(columns.join(''));
@@ -130,18 +134,18 @@ export class Table extends ExcelComponents implements ITable {
     </div>`;
   }
 
-  private createColumn(columnLetters: string): string {
-    return /*html*/ `<div class="column" data-type="resizable">${columnLetters}
+  private createColumn(columnLetters: string, index: number): string {
+    return /*html*/ `<div class="column" data-type="resizableCol" data-col-number="${index}">${columnLetters}
     <div class="column-resize" data-resize="col"></div>
     </div>
     `;
   }
 
-  private createCell(cellLetter: string, placeHolderData: string = ''): string {
+  private createCell(index: number, placeHolderData: string = ''): string {
     return `<div
       class="cell"
       contenteditable
-      data-type="${cellLetter}"
+      data-type="${index}"
       data-placeholder="${placeHolderData}"></div>`;
   }
 }

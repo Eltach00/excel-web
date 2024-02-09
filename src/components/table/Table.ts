@@ -56,7 +56,7 @@ export class Table extends ExcelComponents implements ITable {
     let delta: number;
     document.onmousemove = (e) => {
       $line.setStyles({ left: e.pageX + 'px' });
-      delta = e.pageX - coords.right;
+      delta = e.screenX - coords.right;
     };
 
     document.onmouseup = () => {

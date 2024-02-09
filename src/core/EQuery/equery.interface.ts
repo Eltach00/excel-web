@@ -18,6 +18,7 @@ export interface IEQuery {
   remove(): this;
   getTextContent(): string;
   querySelectorAll(selector: string): NodeListOf<HTMLElement>;
+  setStyle(property: string, value: string | number): this;
 }
 
 export interface IEQueryFunction {

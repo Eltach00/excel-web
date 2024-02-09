@@ -3,7 +3,7 @@ import { capitalize } from './helpers/capitalize';
 import { ComponentsOptions } from './interfaces/excel-component.interface';
 
 export abstract class DomListener {
-  protected $root: HTMLElement | IEQuery;
+  protected $root: IEQuery | HTMLElement;
   protected listeners: string[];
   protected name: string;
 

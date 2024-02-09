@@ -66,6 +66,11 @@ class EQuery implements IEQuery {
   getCoords(): DOMRect {
     return this.$nativeElement.getBoundingClientRect();
   }
+
+  setStyle(property: string, value: string | number): this {
+    this.$nativeElement.style[property] = value
+    return this;
+  }
 }
 
 export const $: IEQueryFunction = (selector: string | HTMLElement): IEQuery => {

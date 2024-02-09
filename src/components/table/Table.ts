@@ -28,57 +28,68 @@ export class Table extends ExcelComponents implements ITable {
 
   onMousedown(event: any): void {
     if (event.target.dataset.resize === 'col') {
-      const $target = $(event.target);
-
-      const $resizableCol = $($target.closest('[data-type="resizableCol"]')!);
-
-      const lineColElement = $.create('div', 'column-resize-line');
-      $resizableCol.append(lineColElement);
-
-      const colNumber = $resizableCol.$nativeElement.dataset.colNumber;
-      const resizableCellsList = this.$root.querySelectorAll(
-        `[data-type="${colNumber}"]`
-      );
-
-      const coords = $resizableCol.getCoords();
-      const originalWidth = coords!.width;
-
-      document.onmousemove = (e) => {
-        const delta = e.pageX - coords!.right;
-        $resizableCol!.$nativeElement.style.width =
-          originalWidth! + delta + 'px';
-        for (const cell of resizableCellsList as any) {
-          cell.style.width = originalWidth + delta + 'px';
-        }
-      };
-      document.onmouseup = () => {
-        lineColElement.remove();
-        document.onmousemove = null;
-        document.onmouseup = null;
-      };
+      this.columnResizeHandle(event);
       // document.addEventListener('mousemove', this.mouseMoveHandler);
     } else if (event.target.dataset.resize === 'row') {
-      const $target = $(event.target);
-
-      const $resizableRow = $($target.closest('[data-type="resizableRow"]')!);
-
-      const $lineRowElement = $.create('div', 'row-resize-line');
-      $resizableRow.append($lineRowElement);
-
-      const coords = $resizableRow.getCoords();
-      const originalHeight = coords!.height;
-
-      document.onmousemove = (e) => {
-        const delta = e.pageY - coords!.bottom;
-        $resizableRow!.$nativeElement.style.height =
-          originalHeight! + delta + 'px';
-      };
-      document.onmouseup = () => {
-        $lineRowElement.remove();
-        document.onmousemove = null;
-        document.onmouseup = null;
-      };
+      this.rowResizeHandle(event);
     }
+  }
+
+  columnResizeHandle(event): void {
+    const $target = $(event.target);
+
+    const $resizableCol = $($target.closest('[data-type="resizableCol"]')!);
+
+    const colNumber = $resizableCol.$nativeElement.dataset.colNumber;
+    const resizableCellsList = this.$root.querySelectorAll(
+      `[data-type="${colNumber}"]`
+    );
+
+    const coords = $target.getCoords();
+    const $line = $.create('div', 'col-resize-line');
+    $line.setStyle('left', coords!.left + 'px');
+    this.$root.append($line.$nativeElement);
+    const originalWidth = $resizableCol.getCoords().width;
+    let delta: number;
+
+    document.onmousemove = (e) => {
+      $line.setStyle('left', e.pageX + 'px');
+      delta = e.pageX - coords.right;
+    };
+
+    document.onmouseup = () => {
+      $resizableCol!.$nativeElement.style.width = originalWidth! + delta + 'px';
+      for (const cell of resizableCellsList as any) {
+        cell.style.width = originalWidth + delta + 'px';
+      }
+
+      $line.remove();
+      document.onmousemove = null;
+      document.onmouseup = null;
+    };
+  }
+
+  rowResizeHandle(event: any) {
+    const $target = $(event.target);
+
+    const $resizableRow = $($target.closest('[data-type="resizableRow"]')!);
+
+    const $lineRowElement = $.create('div', 'row-resize-line');
+    $resizableRow.append($lineRowElement);
+
+    const coords = $resizableRow.getCoords();
+    const originalHeight = coords!.height;
+
+    document.onmousemove = (e) => {
+      const delta = e.pageY - coords!.bottom;
+      $resizableRow!.$nativeElement.style.height =
+        originalHeight! + delta + 'px';
+    };
+    document.onmouseup = () => {
+      $lineRowElement.remove();
+      document.onmousemove = null;
+      document.onmouseup = null;
+    };
   }
 
   // ### another resolving with using bind(this)

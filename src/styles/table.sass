@@ -2,13 +2,19 @@
 @import "mixins"
 
 .excel__table
-    position: absolute
+    position: relative
     top: $header-height + $toolbar-height + $formula-height
     left: 0
     right: 0
     overflow-x: auto
     padding-bottom: 2px
     overflow-x: visible
+    .col-resize-line
+        position: absolute
+        top: 0
+        background-color: $outline-color
+        height: 100%
+        width: 4px
     .row
         position: relative
         width: 100vw
@@ -54,7 +60,7 @@
             background: $background-grey
             width: $col-width
             min-width: 20px
-            .column-resize, .column-resize-line
+            .column-resize
                 position: absolute
                 top: 0
                 bottom: 0
@@ -65,11 +71,6 @@
                 opacity: 0
                 &:hover
                     opacity: 1
-                &:active
-                    opacity: 1
-            .column-resize-line
-                opacity: 1
-                height: 100vh
         .cell
             @include flex-center-center()
             border: 1px solid $border-color

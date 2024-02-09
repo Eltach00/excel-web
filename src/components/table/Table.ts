@@ -35,33 +35,40 @@ export class Table extends ExcelComponents implements ITable {
     }
   }
 
-  columnResizeHandle(event): void {
+  private columnResizeHandle(event): void {
     const $target = $(event.target);
 
     const $resizableCol = $($target.closest('[data-type="resizableCol"]')!);
 
     const colNumber = $resizableCol.$nativeElement.dataset.colNumber;
-    const resizableCellsList = this.$root.querySelectorAll(
+    const resizableCellsList = this.$root.querySelectorAll<HTMLElement>(
       `[data-type="${colNumber}"]`
     );
 
     const coords = $target.getCoords();
-    const $line = $.create('div', 'col-resize-line');
-    $line.setStyle('left', coords!.left + 'px');
-    this.$root.append($line.$nativeElement);
-    const originalWidth = $resizableCol.getCoords().width;
-    let delta: number;
 
+    const $line = $.create('div', 'col-resize-line');
+    $line.setStyles({ left: coords.left + 'px' });
+    this.$root.append($line.$nativeElement);
+
+    const originalWidth = $resizableCol.getCoords().width;
+
+    let delta: number;
     document.onmousemove = (e) => {
-      $line.setStyle('left', e.pageX + 'px');
+      $line.setStyles({ left: e.pageX + 'px' });
       delta = e.pageX - coords.right;
     };
 
     document.onmouseup = () => {
-      $resizableCol!.$nativeElement.style.width = originalWidth! + delta + 'px';
-      for (const cell of resizableCellsList as any) {
-        cell.style.width = originalWidth + delta + 'px';
-      }
+      $resizableCol.setStyles({
+        width: originalWidth + delta + 'px',
+      });
+
+      resizableCellsList.forEach((cell) => {
+        $(cell).setStyles({
+          width: originalWidth + delta + 'px',
+        });
+      });
 
       $line.remove();
       document.onmousemove = null;
@@ -69,7 +76,7 @@ export class Table extends ExcelComponents implements ITable {
     };
   }
 
-  rowResizeHandle(event: any) {
+  private rowResizeHandle(event: any) {
     const $target = $(event.target);
 
     const $resizableRow = $($target.closest('[data-type="resizableRow"]')!);
@@ -78,13 +85,16 @@ export class Table extends ExcelComponents implements ITable {
     $resizableRow.append($lineRowElement);
 
     const coords = $resizableRow.getCoords();
-    const originalHeight = coords!.height;
+
+    const originalHeight = coords.height;
 
     document.onmousemove = (e) => {
       const delta = e.pageY - coords!.bottom;
-      $resizableRow!.$nativeElement.style.height =
-        originalHeight! + delta + 'px';
+      $resizableRow.setStyles({
+        height: originalHeight + delta + 'px',
+      });
     };
+
     document.onmouseup = () => {
       $lineRowElement.remove();
       document.onmousemove = null;

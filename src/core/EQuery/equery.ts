@@ -67,8 +67,10 @@ class EQuery implements IEQuery {
     return this.$nativeElement.getBoundingClientRect();
   }
 
-  setStyle(property: string, value: string | number): this {
-    this.$nativeElement.style[property] = value
+  setStyles(style: { [key: string]: string | number }): this {
+    Object.keys(style).forEach((key) => {
+      this.$nativeElement.style[key] = style[key];
+    });
     return this;
   }
 }

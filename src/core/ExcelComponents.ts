@@ -3,7 +3,7 @@ import { DomListener } from './DomListener';
 import { IEQuery } from '@EQuery';
 
 export abstract class ExcelComponents extends DomListener {
-  constructor(root: HTMLElement | IEQuery, options: ComponentsOptions) {
+  constructor(root: IEQuery, options: ComponentsOptions) {
     super(root, options);
   }
 
@@ -11,7 +11,7 @@ export abstract class ExcelComponents extends DomListener {
     return '';
   }
 
-  initListeners(): void {
+  init(): void {
     this.addListeners();
   }
 

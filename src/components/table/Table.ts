@@ -2,11 +2,12 @@ import { $ } from '@EQuery';
 import { ExcelComponents } from '../../core/ExcelComponents';
 import { ComponentsOptions } from '../../core/interfaces/excel-component.interface';
 import { ITable } from './table.interface';
+import { TableSelecetion } from './selection/TableSelection';
 export class Table extends ExcelComponents implements ITable {
   static className = 'excel__table';
   static options: ComponentsOptions = {
     name: 'Table',
-    listeners: ['mousedown'],
+    listeners: ['mousedown', 'click'],
   };
 
   private countsRow = 40;
@@ -15,6 +16,7 @@ export class Table extends ExcelComponents implements ITable {
     A: 65,
     Z: 90,
   };
+  selection!: TableSelecetion;
 
   // constructor() {
   // this.mouseMoveHandler = this.mouseMoveHandler.bind(this);
@@ -24,7 +26,21 @@ export class Table extends ExcelComponents implements ITable {
     return this.createTemplate(this.countsRow);
   }
 
-  onClick(event: any): void {}
+  onClick(event: any): void {
+    if (event.target.dataset.type === 'cell') {
+      this.selection.select($(event.target));
+    }
+  }
+
+  init(): void {
+    super.init();
+    this.prepare();
+  }
+  private prepare() {
+    this.selection = new TableSelecetion();
+    const initSelectedCell = $(this.$root.find('[data-id="1:1"]')!);
+    this.selection.select(initSelectedCell);
+  }
 
   onMousedown(event: any): void {
     if (event.target.dataset.resize === 'col') {
@@ -41,9 +57,7 @@ export class Table extends ExcelComponents implements ITable {
     const $resizableCol = $($target.closest('[data-type="resizableCol"]')!);
 
     const colNumber = $resizableCol.$nativeElement.dataset.colNumber;
-    const resizableCellsList = this.$root.querySelectorAll<HTMLElement>(
-      `[data-type="${colNumber}"]`
-    );
+    const resizableCellsList = this.$root.findAll(`[data-type="${colNumber}"]`);
 
     const coords = $target.getCoords();
 
@@ -56,7 +70,7 @@ export class Table extends ExcelComponents implements ITable {
     let delta: number;
     document.onmousemove = (e) => {
       $line.setStyles({
-        left: e.pageX + 'px'
+        left: e.pageX + 'px',
       });
       delta = e.screenX - coords.right;
     };
@@ -125,18 +139,23 @@ export class Table extends ExcelComponents implements ITable {
         return this.createColumn(String.fromCharCode(this.CODES.A + i), i);
       });
 
-    const cells: string[] = new Array(columnsCount).fill('').map((cell, i) => {
-      // return this.createCell(`${String.fromCharCode(this.CODES.A + index)}${index + 1}`);
-      return this.createCell(i);
-    });
-
     const firtsRow = this.createRow(columns.join(''));
     const rows: string[] = [firtsRow];
-    for (let i = 1; i <= countRows; i++) {
-      rows.push(this.createRow(cells.join(''), i));
+    for (let rowIndex = 1; rowIndex <= countRows; rowIndex++) {
+      const cells = this.createCellsRow(columnsCount, rowIndex);
+      rows.push(this.createRow(cells, rowIndex));
     }
 
     return rows.join('');
+  }
+
+  private createCellsRow(columnsCount: number, rowIndex: number) {
+    return new Array(columnsCount)
+      .fill('')
+      .map((cell, colIndex) => {
+        return this.createCell(rowIndex, colIndex + 1);
+      })
+      .join('');
   }
 
   private createRow(
@@ -164,11 +183,16 @@ export class Table extends ExcelComponents implements ITable {
     `;
   }
 
-  private createCell(index: number, placeHolderData: string = ''): string {
+  private createCell(
+    rowIndex: number,
+    colIndex: number,
+    placeHolderData: string = ''
+  ): string {
     return `<div
       class="cell"
       contenteditable
-      data-type="${index}"
+      data-type="cell"
+      data-id="${rowIndex}:${colIndex}"
       data-placeholder="${placeHolderData}"></div>`;
   }
 }

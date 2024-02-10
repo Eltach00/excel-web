@@ -36,7 +36,7 @@ export class Excel implements ExcelInterface {
   render(): void {
     this.$rootElement.append(this.getComponents());
     this.componentsInstances.forEach((component) => {
-      component.initListeners();
+      component.init();
     });
   }
 

@@ -37,7 +37,11 @@ class EQuery implements IEQuery {
     return this.$nativeElement.textContent!;
   }
 
-  querySelectorAll(selector: string): NodeListOf<HTMLElement> {
+  find(selector: string): HTMLElement | null {
+    return this.$nativeElement.querySelector<HTMLElement>(selector);
+  }
+
+  findAll(selector: string): NodeListOf<HTMLElement> {
     return this.$nativeElement.querySelectorAll(selector);
   }
 
@@ -71,6 +75,16 @@ class EQuery implements IEQuery {
     Object.keys(style).forEach((key) => {
       this.$nativeElement.style[key] = style[key];
     });
+    return this;
+  }
+
+  addClass(): this {
+    this.$nativeElement.classList.add(...arguments);
+    return this;
+  }
+
+  removeClass(): this {
+    this.$nativeElement.classList.remove(...arguments);
     return this;
   }
 }

@@ -17,8 +17,11 @@ export interface IEQuery {
   getCoords(): DOMRect;
   remove(): this;
   getTextContent(): string;
-  querySelectorAll(selector: string): NodeListOf<HTMLElement>;
+  findAll(selector: string): NodeListOf<HTMLElement>;
   setStyles(style: { [key: string]: string | number }): this;
+  addClass([]): this;
+  removeClass([]): this;
+  find(selector: string): HTMLElement | null;
 }
 
 export interface IEQueryFunction {

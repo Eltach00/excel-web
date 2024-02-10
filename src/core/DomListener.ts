@@ -3,11 +3,11 @@ import { capitalize } from './helpers/capitalize';
 import { ComponentsOptions } from './interfaces/excel-component.interface';
 
 export abstract class DomListener {
-  protected $root: IEQuery | HTMLElement;
+  protected $root: IEQuery;
   protected listeners: string[];
   protected name: string;
 
-  constructor(root: HTMLElement | IEQuery, options: ComponentsOptions) {
+  constructor(root: IEQuery, options: ComponentsOptions) {
     if (!root) {
       throw new Error('No root element provided');
     }

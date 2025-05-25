@@ -25,7 +25,6 @@
     "url": "https://github.com/vladilenm/excel-course/issues"
   },
   "homepage": "https://github.com/vladilenm/excel-course#readme",
-  "private": true,
   "browserslist": "> 0.25%, not dead",
   "devDependencies": {
     "@babel/core": "^7.24.5",
